@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <title>DeadTalks</title>
+  </head>
+  <body>
+
+        <div class="row">
+            <div class="col-lg header">
+                <div>Philosophycal</div>
+                <div class = "sub-header">Feel-oh-so-fickle</div>
+            </div>
+        </div>
+
+        <div class="row philosopher_menu">
+          <div class="col">
+              <a href="/talk/nietzsche">
+                <img class = "phil_img nietzsche"src="static/nietzsche.png" alt="Friedrich Nietzsche" id="nietzsche_img">
+                <img class = "phil_img_glasses nietzsche"src="static/nietzsche_glasses.png" alt="Friedrich Nietzsche" id="nietzsche_img_glasses">
+              </a>
+          </div>
+          <div class="col">
+              <a href="/talk/simone">
+                <img class = "phil_img simone"src="static/simone.png" alt="Simone de Beauvoir" id="simone_img">
+                <img class = "phil_img_glasses simone"src="static/simone_glasses.png" alt="Simone de Beauvoir" id="simone_img_glasses">
+              </a>
+          </div>
+          <div class="col">
+              <a href="/talk/camus">
+                <img class = "phil_img camus"src="static/camus.png" alt="Albert Camus" id="camus_img">
+                <img class = "phil_img_glasses camus"src="static/camus_glasses.png" alt="Albert Camus" id="camus_img_glasses">
+              </a>
+          </div>
+<!--           <div class="col">
+            <a href="/talk/camus">
+              <img class = "phil_img" src="static/camus.png" alt="Albert Camus">
+            </a>
+          </div> -->
+        </div>
+
+        <div class="row">
+          <div class = "info col">
+            <a href = "/about">About</a>
+          </div>
+        </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.4/addons/p5.dom.min.js"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+
+    <script>
+      // $(document).ready(function() {
+      //   $('.phil_img_glasses').hide();
+      // })
+
+      $(".nietzsche").mouseover(function() {
+        $("#nietzsche_img_glasses").show();
+        $("#nietzsche_img").hide();
+      });
+
+      $(".nietzsche").mouseleave(function() {
+        $("#nietzsche_img").show();
+        $("#nietzsche_img_glasses").hide();
+      });
+
+      $(".camus").mouseover(function() {
+        $("#camus_img_glasses").show();
+        $("#camus_img").hide();
+      });
+
+      $(".camus").mouseleave(function() {
+        $("#camus_img").show();
+        $("#camus_img_glasses").hide();
+      });
+
+      $(".simone").mouseover(function() {
+        $("#simone_img_glasses").show();
+        $("#simone_img").hide();
+      });
+
+      $(".simone").mouseleave(function() {
+        $("#simone_img").show();
+        $("#simone_img_glasses").hide();
+      });
+
+    </script>
+
+    <style>
+      .header {
+        position: relative;
+        height: 20%;
+        padding : 40px;
+        color: #FFFFFF;
+        font-size: 32px;
+        font-weight: 100;
+        font-family: avenir;
+        letter-spacing: 5px;
+        background-color: black;
+        text-align: center;
+      }
+
+    .sub-header {
+        padding-top: 10px;
+        color: #FFFFFF;
+        font-size: 18px;
+        font-weight: 100;
+        font-family: avenir;
+        letter-spacing: 5px;
+        background-color: black;
+        text-align: center;
+      }
+
+      .butt {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        width: 30%;
+        height: 10%;
+        background-color: #000000;
+        color: #FFFFFF;
+        font-family: monospace;
+        font-size: 20px;
+        padding-right: 20px;
+        border: none;
+        padding-left: 20px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        display: inline-block;
+      }
+
+      .messagebox {
+        font-family: monospace;
+        font-size: 20px;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 10%;
+        color: white;
+        text-align: left;
+      }
+
+      .messagewindow {
+        position: static;
+        overflow: auto;
+      }
+
+      .message_holder {
+        width: 100%;
+        padding: 10px;
+        position: fixed;
+        overflow-y: scroll;
+        bottom: 12%;
+        height: 65%;
+      }
+
+      .phil_img {
+        margin: 20px;
+        width: 300px;
+        box-shadow: 10px 10px #D3D3D3;
+      }
+
+      .phil_img_glasses {
+        display: none;
+        margin: 20px;
+        width: 300px;
+        box-shadow: 10px 10px #D3D3D3;
+      }
+
+      .philosopher_menu {
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+
+      .info {
+        text-align: center;
+        font-family: avenir;
+        padding: 20px;
+        bottom: 0;
+      }
+
+      a:link {
+        color: grey;
+      }
+
+    </style>
+  </body>
+</html>
