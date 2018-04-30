@@ -68,10 +68,11 @@
 
         var spRec = new p5.SpeechRec(); // new P5.SpeechRec object
         spRec.continuous = false; // do continuous recognition
-        spRec.interimResults = true; // allow partial recognition (faster, less accurate)
+        spRec.interimResults = false; // allow partial recognition (faster, less accurate)
         var prevRecordedPhrase = "";
         var prevResponse = "";
         var voice = new p5.Speech();
+        var isSpeaking = false;
 
         function setup() {
           initiateSpeechRec();
@@ -93,18 +94,42 @@
         }
 
         function recordAndRespond() {
-          if (spRec.resultValue === true && spRec.resultConfidence > 0.25 && prevRecordedPhrase != spRec.resultString) {
+          if (spRec.resultValue === true && spRec.resultConfidence > 0.25 && prevRecordedPhrase != spRec.resultString && isSpeaking == false) {
+            // if(spRec.resultString != '') {
+            //   isSpeechRec = true;
+            // } else {
+            //   isSpeechRec = false;
+            // }
+
             $('input.message').val(spRec.resultString);
             console.log(spRec.resultString);
             $('form').submit();
             prevRecordedPhrase = spRec.resultString;
           }
+          // else if(!spRec.resultValue) {
+          //   isSpeechRec = false;
+          // }
         }
 
-        function doSpeak(message) {
-          voice.setVoice("Alex");
-          voice.interrupt = true;
-          voice.speak(message);
+        function doSpeak(philosopher_name, message) {
+            isSpeaking = true;
+            if(philosopher_name == "nietzsche") {
+              voice.setVoice("Alex");
+            } else if(philosopher_name == "simone") {
+              voice.setVoice("Samantha");
+            } else if(philosopher_name == "camus") {
+              voice.setVoice("Alex");
+            } else if(philosopher_name == "watts") {
+              voice.setVoice("Alex");
+            }
+            voice.interrupt = true;
+            voice.speak(message);
+            voice.ended(setRecOn);
+        }
+
+        function setRecOn() {
+          console.log("Hey hey hey hey!");
+          isSpeaking = false;
         }
 
       var socket = io.connect( 'http://' + document.domain + ':' + location.port )
@@ -128,7 +153,7 @@
                 philosopher_name : philosopher_name
           } )
           $( 'h1' ).remove()
-          $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+user_name+'</b> '+message+'</div>' )
+          $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+user_name+'</b> '+message+'</div>' +'<br>' )
           }
 
           // empty the input field
@@ -143,10 +168,10 @@
         if( typeof msg.responder_name !== 'undefined' ) {
             if(prevResponse != msg.message) {
             $( 'h1' ).remove()
-            $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg.responder_name+'</b> '+msg.message+'</div>' )
+            $( 'div.message_holder' ).append( '<div class="msg_bbl"><b style="color: #000">'+msg.responder_name+'</b> '+msg.message+'</div>' + '<br>')
             $('.message_holder').scrollTop($('.message_holder')[0].scrollHeight);
             prevResponse = msg.message;
-            doSpeak(msg.message);
+            doSpeak(msg.responder_name, msg.message);
         }
       }
       });
@@ -211,6 +236,8 @@
       .messagewindow {
         position: static;
         overflow: auto;
+        font-family: monospace;
+        font-size: 18px;
       }
 
       .message_holder {

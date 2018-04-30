@@ -12,10 +12,12 @@ nlp = spacy.load('en_core_web_lg')
 doc_nietzsche = nlp(open("data/nietzsche_texts.txt").read())
 doc_camus = nlp(open("data/camus_texts.rtf").read())
 doc_simone = nlp(open("data/simone_texts.rtf").read())
+doc_watts = nlp(open("data/watts_texts.rtf").read())
 
 tokens_nietzsche = list(set([w.text for w in doc_nietzsche if w.is_alpha]))
 tokens_camus = list(set([w.text for w in doc_camus if w.is_alpha]))
 tokens_simone = list(set([w.text for w in doc_simone if w.is_alpha]))
+tokens_watts = list(set([w.text for w in doc_watts if w.is_alpha]))
 
 
 def vec(s):
@@ -44,6 +46,7 @@ def sentvec(s):
 sentences_nietzsche = list(doc_nietzsche.sents)
 sentences_camus = list(doc_camus.sents)
 sentences_simone = list(doc_simone.sents)
+sentences_watts = list(doc_watts.sents)
 
 
 def meanv(coords):
@@ -98,6 +101,8 @@ def handle_my_custom_event(data):
         sentences = sentences_camus
     elif philosopher_name == "simone":
         sentences = sentences_simone
+    elif philosopher_name == "watts":
+        sentences = sentences_watts
     # print("\n\nUSER QUERY")
     # print("----------------------------")
     # print(question + '\n\n\n')

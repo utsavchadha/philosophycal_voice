@@ -38,16 +38,18 @@
                 <img class = "phil_img_glasses camus"src="static/camus_glasses.png" alt="Albert Camus" id="camus_img_glasses">
               </a>
           </div>
-<!--           <div class="col">
-            <a href="/talk/camus">
-              <img class = "phil_img" src="static/camus.png" alt="Albert Camus">
-            </a>
-          </div> -->
+          <div class="col">
+              <a href="/talk/watts">
+                <img class = "phil_img watts"src="static/watts.png" alt="Alan Watts" id="watts_img">
+                <img class = "phil_img_glasses watts"src="static/watts_glasses.png" alt="Alan Watts" id="watts_img_glasses">
+              </a>
+          </div>
+
         </div>
 
         <div class="row">
           <div class = "info col">
-            <a href = "/about">About</a>
+            <a href = "javascript:AlertIt()">About</a>
           </div>
         </div>
 
@@ -67,6 +69,10 @@
       // $(document).ready(function() {
       //   $('.phil_img_glasses').hide();
       // })
+
+      function AlertIt() {
+        //alert ("Please click on OK to continue.");
+      }
 
       $(".nietzsche").mouseover(function() {
         $("#nietzsche_img_glasses").show();
@@ -97,6 +103,17 @@
         $("#simone_img").show();
         $("#simone_img_glasses").hide();
       });
+
+      $(".watts").mouseover(function() {
+        $("#watts_img_glasses").show();
+        $("#watts_img").hide();
+      });
+
+      $(".watts").mouseleave(function() {
+        $("#watts_img").show();
+        $("#watts_img_glasses").hide();
+      });
+
 
     </script>
 
@@ -171,29 +188,32 @@
 
       .phil_img {
         margin: 20px;
-        width: 300px;
+        width: 250px;
         box-shadow: 10px 10px #D3D3D3;
       }
 
       .phil_img_glasses {
         display: none;
         margin: 20px;
-        width: 300px;
+        width: 250px;
         box-shadow: 10px 10px #D3D3D3;
       }
 
       .philosopher_menu {
         padding: 20px;
         text-align: center;
-        margin-bottom: 20px;
-        margin-top: 20px;
+        margin-bottom: 40px;
+        margin-top: 40px;
       }
 
       .info {
+        position: fixed;
         text-align: center;
-        font-family: avenir;
+        font-family: monospace;
+        font-size: 18px;
         padding: 20px;
         bottom: 0;
+        left: 0;
       }
 
       a:link {
